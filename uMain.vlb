@@ -1,14 +1,5 @@
-﻿[btDelete]
-Coordinates=252,192,63,36
-
-[PageControl]
-Coordinates=156,192,86,36
-
-[DataSource]
+﻿[DataSource]
 Coordinates=74,1,82,36
-
-[btRead]
-Coordinates=90,192,56,36
 
 [Panel2]
 Coordinates=241,78,55,58
@@ -16,18 +7,8 @@ Coordinates=241,78,55,58
 [shtCreate]
 Coordinates=10,192,70,36
 
-[pnlMenu]
-Coordinates=167,78,64,58
-
-[btUpdate]
-Coordinates=309,146,67,36
-
 [fdConnection]
 Coordinates=295,56,90,36
-
-[btCreate]
-Coordinates=235,146,64,36
-Visible=True
 
 [fdQuery]
 Coordinates=97,78,60,58
@@ -69,5 +50,9 @@ Coordinates=298,10,53,58
 Coordinates=306,78,73,36
 
 []
-Coordinates=423,78,91,36
+Coordinates=167,78,64,58
+Visible=True
+
+[pageControl]
+Coordinates=156,192,86,36
 

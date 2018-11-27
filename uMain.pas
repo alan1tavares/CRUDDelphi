@@ -11,20 +11,16 @@ uses
   FireDAC.Phys.FBDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Vcl.ExtCtrls, Vcl.Buttons, Vcl.ComCtrls, Vcl.Grids,
-  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ButtonGroup;
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.ButtonGroup, Vcl.WinXCtrls, Vcl.CategoryButtons,
+  Vcl.Mask, Vcl.DBCtrls;
 
 type
   TfrmMain = class(TForm)
     fdConnection: TFDConnection;
     DataSource: TDataSource;
     fdQuery: TFDQuery;
-    pnlMenu: TPanel;
     Panel2: TPanel;
-    btCreate: TSpeedButton;
-    btRead: TSpeedButton;
-    btDelete: TSpeedButton;
-    btUpdate: TSpeedButton;
-    PageControl: TPageControl;
+    pageControl: TPageControl;
     shtCreate: TTabSheet;
     shtRead: TTabSheet;
     shtUpdate: TTabSheet;
@@ -38,12 +34,27 @@ type
     edtCountry: TEdit;
     bttSelect: TButton;
     bttAll: TButton;
+    pnMenu: TPanel;
+    catMenu: TCategoryButtons;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    Label4: TLabel;
+    Label3: TLabel;
+    edCountry: TDBEdit;
+    edCurrency: TDBEdit;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure bttSelectClick(Sender: TObject);
     procedure bttAllClick(Sender: TObject);
     procedure btReadClick(Sender: TObject);
+    procedure catMenuCategories0Items0Click(Sender: TObject);
+    procedure catMenuCategories0Items2Click(Sender: TObject);
+    procedure catMenuCategories0Items3Click(Sender: TObject);
   private
     { Private declarations }
+    procedure HiddenTabs();
   public
     { Public declarations }
   end;
@@ -58,8 +69,6 @@ implementation
 procedure TfrmMain.btReadClick(Sender: TObject);
 begin
   PageControl.ActivePage := shtRead;
-  btRead.Down := True;
-  ShowMessage(btRead.Down.ToString);
 end;
 
 procedure TfrmMain.bttAllClick(Sender: TObject);
@@ -81,9 +90,34 @@ begin
   fdQuery.Open;
 end;
 
+procedure TfrmMain.catMenuCategories0Items0Click(Sender: TObject);
+begin
+  PageControl.ActivePage := shtCreate
+end;
+
+procedure TfrmMain.catMenuCategories0Items2Click(Sender: TObject);
+begin
+  PageControl.ActivePage := shtUpdate;
+end;
+
+procedure TfrmMain.catMenuCategories0Items3Click(Sender: TObject);
+begin
+  PageControl.ActivePage := shtDelete
+end;
+
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   fdQuery.Open;
+
+  HiddenTabs;
+end;
+
+procedure TfrmMain.HiddenTabs;
+var
+  I: Integer;
+begin
+  for I := 0 to pageControl.PageCount - 1 do
+    pageControl.Pages[I].TabVisible := false;
 end;
 
 end.
