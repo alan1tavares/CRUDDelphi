@@ -51,6 +51,14 @@ type
     DBEdit2: TDBEdit;
     btUpdate: TButton;
     Label9: TLabel;
+    DBGrid3: TDBGrid;
+    Panel1: TPanel;
+    Label10: TLabel;
+    DBEdit3: TDBEdit;
+    Label11: TLabel;
+    DBEdit4: TDBEdit;
+    Label12: TLabel;
+    btDelete: TButton;
     procedure FormCreate(Sender: TObject);
     procedure bttSelectClick(Sender: TObject);
     procedure bttAllClick(Sender: TObject);
@@ -59,11 +67,11 @@ type
     procedure catMenuCategories0Items2Click(Sender: TObject);
     procedure catMenuCategories0Items3Click(Sender: TObject);
     procedure btInsertClick(Sender: TObject);
+    procedure btDeleteClick(Sender: TObject);
   private
     { Private declarations }
     messagemCrud: String;
     procedure HiddenTabs;
-//    procedure clearEdit;
   public
     { Public declarations }
   end;
@@ -98,6 +106,12 @@ begin
   fdQuery.Open;
 end;
 
+procedure TfrmMain.btDeleteClick(Sender: TObject);
+begin
+  fdQuery.Delete;
+  ShowMessage(messagemCrud);
+end;
+
 procedure TfrmMain.btInsertClick(Sender: TObject);
 begin
   fdQuery.Post;
@@ -123,14 +137,12 @@ end;
 
 procedure TfrmMain.catMenuCategories0Items3Click(Sender: TObject);
 begin
-  PageControl.ActivePage := shtDelete
-end;
+  PageControl.ActivePage := shtDelete;
 
-//procedure TfrmMain.clearEdit;
-//begin
-//  edCountry.Text := '';
-//  edCurrency.Text := '';
-//end;
+  fdQuery.Cancel;
+
+  messagemCrud := 'O item foi deletado com sucesso';
+end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin

@@ -35,7 +35,7 @@ object frmMain: TfrmMain
     Top = 33
     Width = 529
     Height = 453
-    ActivePage = shtUpdate
+    ActivePage = shtDelete
     Align = alClient
     DoubleBuffered = False
     MultiLine = True
@@ -264,6 +264,88 @@ object frmMain: TfrmMain
     object shtDelete: TTabSheet
       Caption = 'shtDelete'
       ImageIndex = 3
+      object DBGrid3: TDBGrid
+        Left = 0
+        Top = 105
+        Width = 521
+        Height = 318
+        Align = alClient
+        DataSource = DataSource
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 521
+        Height = 105
+        Align = alTop
+        Caption = 'Panel1'
+        ShowCaption = False
+        TabOrder = 1
+        object Label10: TLabel
+          Left = 18
+          Top = 46
+          Width = 55
+          Height = 15
+          Caption = 'COUNTRY'
+          FocusControl = DBEdit3
+        end
+        object Label11: TLabel
+          Left = 261
+          Top = 46
+          Width = 60
+          Height = 15
+          Caption = 'CURRENCY'
+          FocusControl = DBEdit4
+        end
+        object Label12: TLabel
+          Left = 18
+          Top = 13
+          Width = 49
+          Height = 23
+          Caption = 'Delete'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 24
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+        end
+        object DBEdit3: TDBEdit
+          Left = 18
+          Top = 62
+          Width = 229
+          Height = 23
+          DataField = 'COUNTRY'
+          DataSource = DataSource
+          Enabled = False
+          TabOrder = 0
+        end
+        object DBEdit4: TDBEdit
+          Left = 261
+          Top = 62
+          Width = 154
+          Height = 23
+          DataField = 'CURRENCY'
+          DataSource = DataSource
+          Enabled = False
+          TabOrder = 1
+        end
+        object btDelete: TButton
+          Left = 421
+          Top = 62
+          Width = 75
+          Height = 25
+          Caption = 'Delete'
+          TabOrder = 2
+          OnClick = btDeleteClick
+        end
+      end
     end
   end
   object pnMenu: TPanel
@@ -324,7 +406,7 @@ object frmMain: TfrmMain
       'DriverID=FB')
     Connected = True
     LoginPrompt = False
-    Left = 16
+    Left = 24
     Top = 224
   end
   object DataSource: TDataSource
