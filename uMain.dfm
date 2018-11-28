@@ -14,6 +14,13 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 15
+  object Label3: TLabel
+    Left = 456
+    Top = 248
+    Width = 34
+    Height = 15
+    Caption = 'Label3'
+  end
   object Panel2: TPanel
     Left = 0
     Top = 0
@@ -22,14 +29,13 @@ object frmMain: TfrmMain
     Align = alTop
     Caption = 'Panel2'
     TabOrder = 0
-    ExplicitWidth = 692
   end
   object pageControl: TPageControl
     Left = 185
     Top = 33
     Width = 529
     Height = 453
-    ActivePage = shtCreate
+    ActivePage = shtUpdate
     Align = alClient
     DoubleBuffered = False
     MultiLine = True
@@ -37,8 +43,7 @@ object frmMain: TfrmMain
     TabOrder = 1
     object shtCreate: TTabSheet
       Caption = 'shtCreate'
-      ExplicitLeft = 68
-      ExplicitTop = 90
+      ExplicitLeft = 6
       object Label6: TLabel
         Left = 11
         Top = 40
@@ -46,6 +51,7 @@ object frmMain: TfrmMain
         Height = 15
         Caption = 'COUNTRY'
         FocusControl = edCountry
+        Transparent = True
       end
       object Label5: TLabel
         Left = 11
@@ -86,26 +92,19 @@ object frmMain: TfrmMain
         DataSource = DataSource
         TabOrder = 1
       end
+      object btInsert: TButton
+        Left = 11
+        Top = 144
+        Width = 75
+        Height = 25
+        Caption = 'Insert'
+        TabOrder = 2
+        OnClick = btInsertClick
+      end
     end
     object shtRead: TTabSheet
       Caption = 'Read'
       ImageIndex = 1
-      object Label4: TLabel
-        Left = 272
-        Top = 144
-        Width = 60
-        Height = 15
-        Caption = 'CURRENCY'
-        FocusControl = DBEdit2
-      end
-      object Label3: TLabel
-        Left = 272
-        Top = 96
-        Width = 55
-        Height = 15
-        Caption = 'COUNTRY'
-        FocusControl = DBEdit1
-      end
       object DBGrid1: TDBGrid
         Left = 0
         Top = 107
@@ -176,28 +175,91 @@ object frmMain: TfrmMain
           OnClick = bttAllClick
         end
       end
-      object DBEdit1: TDBEdit
-        Left = 272
-        Top = 112
-        Width = 229
-        Height = 23
-        DataField = 'COUNTRY'
-        DataSource = DataSource
-        TabOrder = 2
-      end
-      object DBEdit2: TDBEdit
-        Left = 272
-        Top = 160
-        Width = 154
-        Height = 23
-        DataField = 'CURRENCY'
-        DataSource = DataSource
-        TabOrder = 3
-      end
     end
     object shtUpdate: TTabSheet
       Caption = 'shtUpdate'
       ImageIndex = 2
+      object pnUpdateTop: TPanel
+        Left = 0
+        Top = 0
+        Width = 521
+        Height = 105
+        Align = alTop
+        Caption = 'Panel1'
+        ShowCaption = False
+        TabOrder = 0
+        object Label4: TLabel
+          Left = 16
+          Top = 40
+          Width = 55
+          Height = 15
+          Caption = 'COUNTRY'
+          FocusControl = DBEdit1
+        end
+        object Label8: TLabel
+          Left = 267
+          Top = 40
+          Width = 60
+          Height = 15
+          Caption = 'CURRENCY'
+          FocusControl = DBEdit2
+        end
+        object Label9: TLabel
+          Left = 18
+          Top = 10
+          Width = 56
+          Height = 23
+          Caption = 'Update'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = 24
+          Font.Name = 'Segoe UI'
+          Font.Style = []
+          ParentFont = False
+        end
+        object DBEdit1: TDBEdit
+          Left = 16
+          Top = 56
+          Width = 229
+          Height = 23
+          DataField = 'COUNTRY'
+          DataSource = DataSource
+          TabOrder = 0
+        end
+        object DBEdit2: TDBEdit
+          Left = 267
+          Top = 56
+          Width = 154
+          Height = 23
+          DataField = 'CURRENCY'
+          DataSource = DataSource
+          TabOrder = 1
+        end
+      end
+      object DBGrid2: TDBGrid
+        Left = 0
+        Top = 105
+        Width = 521
+        Height = 318
+        Align = alClient
+        DataSource = DataSource
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        TabOrder = 1
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -12
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = []
+      end
+      object btUpdate: TButton
+        Left = 427
+        Top = 55
+        Width = 75
+        Height = 25
+        Caption = 'Update'
+        TabOrder = 2
+        OnClick = btInsertClick
+      end
     end
     object shtDelete: TTabSheet
       Caption = 'shtDelete'
@@ -212,9 +274,6 @@ object frmMain: TfrmMain
     Align = alLeft
     Caption = 'pnMenu'
     TabOrder = 2
-    ExplicitLeft = 96
-    ExplicitTop = 39
-    ExplicitHeight = 424
     object catMenu: TCategoryButtons
       Left = 0
       Top = -18
@@ -246,7 +305,6 @@ object frmMain: TfrmMain
               OnClick = catMenuCategories0Items3Click
             end>
         end>
-      Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = 14
@@ -266,20 +324,20 @@ object frmMain: TfrmMain
       'DriverID=FB')
     Connected = True
     LoginPrompt = False
-    Left = 240
-    Top = 304
+    Left = 16
+    Top = 224
   end
   object DataSource: TDataSource
     DataSet = fdQuery
-    Left = 360
-    Top = 304
+    Left = 136
+    Top = 224
   end
   object fdQuery: TFDQuery
     Connection = fdConnection
     SQL.Strings = (
       'select * from COUNTRY')
-    Left = 304
-    Top = 304
+    Left = 80
+    Top = 224
     object fdQueryCOUNTRY: TStringField
       FieldName = 'COUNTRY'
       Origin = 'COUNTRY'

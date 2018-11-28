@@ -36,15 +36,21 @@ type
     bttAll: TButton;
     pnMenu: TPanel;
     catMenu: TCategoryButtons;
-    DBEdit1: TDBEdit;
-    DBEdit2: TDBEdit;
-    Label4: TLabel;
-    Label3: TLabel;
     edCountry: TDBEdit;
     edCurrency: TDBEdit;
     Label5: TLabel;
     Label6: TLabel;
     Label7: TLabel;
+    btInsert: TButton;
+    Label3: TLabel;
+    pnUpdateTop: TPanel;
+    DBGrid2: TDBGrid;
+    Label4: TLabel;
+    DBEdit1: TDBEdit;
+    Label8: TLabel;
+    DBEdit2: TDBEdit;
+    btUpdate: TButton;
+    Label9: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure bttSelectClick(Sender: TObject);
     procedure bttAllClick(Sender: TObject);
@@ -52,9 +58,12 @@ type
     procedure catMenuCategories0Items0Click(Sender: TObject);
     procedure catMenuCategories0Items2Click(Sender: TObject);
     procedure catMenuCategories0Items3Click(Sender: TObject);
+    procedure btInsertClick(Sender: TObject);
   private
     { Private declarations }
-    procedure HiddenTabs();
+    messagemCrud: String;
+    procedure HiddenTabs;
+//    procedure clearEdit;
   public
     { Public declarations }
   end;
@@ -69,6 +78,7 @@ implementation
 procedure TfrmMain.btReadClick(Sender: TObject);
 begin
   PageControl.ActivePage := shtRead;
+  fdQuery.Cancel;
 end;
 
 procedure TfrmMain.bttAllClick(Sender: TObject);
@@ -80,8 +90,6 @@ begin
 end;
 
 procedure TfrmMain.bttSelectClick(Sender: TObject);
-var
-  str: String;
 begin
   fdQuery.Close;
   fdQuery.SQL.Clear;
@@ -90,20 +98,39 @@ begin
   fdQuery.Open;
 end;
 
+procedure TfrmMain.btInsertClick(Sender: TObject);
+begin
+  fdQuery.Post;
+  ShowMessage(messagemCrud);
+end;
+
 procedure TfrmMain.catMenuCategories0Items0Click(Sender: TObject);
 begin
-  PageControl.ActivePage := shtCreate
+  PageControl.ActivePage := shtCreate;
+  fdQuery.Insert;
+  messagemCrud := 'O item foi inserido com suceesso';
 end;
 
 procedure TfrmMain.catMenuCategories0Items2Click(Sender: TObject);
 begin
   PageControl.ActivePage := shtUpdate;
+
+  fdQuery.Cancel;
+  fdQuery.Edit;
+
+  messagemCrud := 'O item foi atualizado com sucesso';
 end;
 
 procedure TfrmMain.catMenuCategories0Items3Click(Sender: TObject);
 begin
   PageControl.ActivePage := shtDelete
 end;
+
+//procedure TfrmMain.clearEdit;
+//begin
+//  edCountry.Text := '';
+//  edCurrency.Text := '';
+//end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
