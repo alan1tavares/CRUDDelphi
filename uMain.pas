@@ -72,6 +72,7 @@ type
     { Private declarations }
     messagemCrud: String;
     procedure HiddenTabs;
+    procedure SelectTodosOsRegistros;
   public
     { Public declarations }
   end;
@@ -91,10 +92,7 @@ end;
 
 procedure TfrmMain.bttAllClick(Sender: TObject);
 begin
-  fdQuery.Close;
-  fdQuery.SQL.Clear;
-  fdQuery.SQL.add('select * from COUNTRY');
-  fdQuery.Open;
+  SelectTodosOsRegistros;
 end;
 
 procedure TfrmMain.bttSelectClick(Sender: TObject);
@@ -129,6 +127,7 @@ procedure TfrmMain.catMenuCategories0Items2Click(Sender: TObject);
 begin
   PageControl.ActivePage := shtUpdate;
 
+  SelectTodosOsRegistros;
   fdQuery.Cancel;
   fdQuery.Edit;
 
@@ -139,6 +138,7 @@ procedure TfrmMain.catMenuCategories0Items3Click(Sender: TObject);
 begin
   PageControl.ActivePage := shtDelete;
 
+  SelectTodosOsRegistros;
   fdQuery.Cancel;
 
   messagemCrud := 'O item foi deletado com sucesso';
@@ -157,6 +157,14 @@ var
 begin
   for I := 0 to pageControl.PageCount - 1 do
     pageControl.Pages[I].TabVisible := false;
+end;
+
+procedure TfrmMain.SelectTodosOsRegistros;
+begin
+  fdQuery.Close;
+  fdQuery.SQL.Clear;
+  fdQuery.SQL.add('select * from COUNTRY');
+  fdQuery.Open;
 end;
 
 end.

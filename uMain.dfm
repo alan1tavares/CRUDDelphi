@@ -35,7 +35,7 @@ object frmMain: TfrmMain
     Top = 33
     Width = 529
     Height = 453
-    ActivePage = shtDelete
+    ActivePage = shtRead
     Align = alClient
     DoubleBuffered = False
     MultiLine = True
